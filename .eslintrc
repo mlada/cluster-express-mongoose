@@ -16,11 +16,11 @@
 	"rules": {
 		"no-this-before-super": "warn",
 		"no-unreachable": "warn",
-		"no-unused-vars": "warn",
+		"no-unused-vars": "off",
 		"constructor-super": "warn",
 		"valid-typeof": "warn",
 		"no-extra-semi": "warn",
-		"no-console": "warn",
+		"no-console": "off",
 		"prefer-const": "error",
 		"no-undef": "error",
 		"no-const-assign": "error",

@@ -17,7 +17,7 @@
 	"eslint.run": "onSave",
 	"eslint.autoFixOnSave": true,
 
-	"eslint.options": { "configFile": "C:/projects/node1018/.eslintrc" },
+	"eslint.options": { "configFile": "./.eslintrc" },
 	"eslint.workingDirectories": ["."],
 	"eslint.validate": ["javascript", "javascriptreact", { "language": "html", "autoFix": true }],
 	"prettier.eslintIntegration": true,
