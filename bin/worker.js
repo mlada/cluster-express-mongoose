@@ -29,7 +29,14 @@ app
 // используем для доступа к нему отдельный роут
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
-const { user } = require('../controllers/index');
+const passport = require('passport');
+
+router.use(passport.initialize());
+router.use(passport.session());
+const { user, auth } = require('../controllers/index');
+
+app.use('/private', auth.mustAuthenticatedMw);
+
 // подключаем роутинг
 router
 	.route('/users')
@@ -41,6 +48,10 @@ router
 	.get(user.getOneUser)
 	.put(user.updateUser)
 	.delete(user.deleteUser);
+
+router.route('/login').post(auth.login);
+router.route('/logout').post(auth.logout);
+router.route('/register').post(auth.register);
 
 router.param('userId', user.getByIdUser);
 

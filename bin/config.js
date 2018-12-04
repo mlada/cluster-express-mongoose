@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')();
 const static = ('/public', express.static(path.join(__dirname, '../public')));
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+
 const jsonBP = bodyParser.json({
 	limit: '10kb'
 });

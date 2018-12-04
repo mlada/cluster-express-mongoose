@@ -1,17 +1,11 @@
-const router = new (require('express')).Router();
-
-const models = require('./../models');
+const { User } = require('./../models');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-router.use(passport.initialize());
-router.use(passport.session());
-
 passport.use(
 	new LocalStrategy((username, password, done) => {
-		models.User.findOne({ username: username }, (err, user) => {
-			console.log(user);
+		User.findOne({ username: username }, (err, user) => {
 			if (err) {
 				return done(err);
 			}
@@ -31,29 +25,46 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-	models.User.findById(id, function(err, user) {
+	User.findById(id, function(err, user) {
 		done(err, user);
 	});
 });
 
-router.post(
-	'/',
-	passport.authenticate('local', {
-		successRedirect: '/cabinet',
-		failureRedirect: '/login'
-	})
-);
+const login = (req, res, next) => {
+	passport.authenticate('local', function(err, user, info) {
+		return err
+			? next(err)
+			: user
+			? req.logIn(user, function(err) {
+					return err ? next(err) : res.json(user);
+			  })
+			: res.send('Not authtorised');
+	})(req, res, next);
+};
 
-router.get('/', function(req, res, next) {
-	if (!req.user) {
-		req.message = 'not logged';
-	}
-	res.render('login', { locals: { user: req.user, message: req.message } });
-});
+const logout = (req, res) => {
+	req.logout();
+	res.send('You are logged out');
+};
 
-router.get('/all', async (req, res, next) => {
-	const users = await models.User.find();
-	res.send(users);
-});
+const register = (req, res, next) => {
+	const user = new User({ username: req.body.username, password: req.body.password });
+	user.save(function(err) {
+		return err
+			? next(err)
+			: req.logIn(user, function(err) {
+					return err ? next(err) : res.json(user);
+			  });
+	});
+};
 
-module.exports = router;
+const mustAuthenticatedMw = (req, res, next) => {
+	req.isAuthenticated()
+		? () => {
+				console.log('Authenticated');
+				next();
+		  }
+		: res.send('Not authtorised');
+};
+
+module.exports = { login, logout, register, mustAuthenticatedMw };
