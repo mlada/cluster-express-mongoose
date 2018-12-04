@@ -1,15 +1,15 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "1.0.0",
-		"title": "Cluster-express-mongoose api doc",
+		"version": "0.0.1",
+		"title": "API doc",
 		"description": "Pecherina Mlada",
-		"author": "Pecherina Mlada",
 		"license": {
 			"name": "MIT",
 			"url": "https://opensource.org/licenses/MIT"
 		}
 	},
+
 	"host": "localhost:3000",
 	"basePath": "/api",
 	"tags": [
@@ -22,31 +22,6 @@
 	"consumes": ["application/json"],
 	"produces": ["application/json"],
 	"paths": {
-		"/login": {
-			"post": {
-				"tags": ["Users"],
-				"description": "Login to system",
-				"parameters": [
-					{
-						"name": "user",
-						"in": "body",
-						"description": "User that we want to create",
-						"schema": {
-							"$ref": "#/definitions/User"
-						}
-					}
-				],
-				"produces": ["application/json"],
-				"responses": {
-					"200": {
-						"description": "New user is created",
-						"schema": {
-							"$ref": "#/definitions/User"
-						}
-					}
-				}
-			}
-		},
 		"/users": {
 			"post": {
 				"tags": ["Users"],
@@ -144,23 +119,32 @@
 	},
 	"definitions": {
 		"User": {
-			"required": ["username", "_id", "password"],
+			"required": ["username", "password"],
 			"properties": {
 				"_id": {
 					"type": "string",
-					"uniqueItems": true
+					"uniqueItems": true,
+					"example": "5c05dad9fc146643282025fb"
 				},
 				"username": {
-					"type": "string"
+					"type": "string",
+					"example": "Theresa79"
 				},
 				"password": {
-					"type": "string"
+					"type": "string",
+					"example": "dQFX5CYDwLbIJpg"
+				},
+				"name": {
+					"type": "string",
+					"example": "Theresa"
 				}
 			}
 		},
 		"Users": {
 			"type": "array",
-			"$ref": "#/definitions/User"
+			"items": {
+				"$ref": "#/definitions/User"
+			}
 		}
 	}
 }

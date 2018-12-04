@@ -1,5 +1,5 @@
 const createCollection = async db => {
-	await db.createCollection('user', {
+	await db.createCollection('users', {
 		validator: {
 			$and: [{ username: { $type: 'string' } }, { password: { $type: 'string' } }]
 		},
@@ -10,7 +10,7 @@ const createCollection = async db => {
 module.exports = {
 	async up(db) {
 		try {
-			const col = await db.listCollections({ name: 'user' }).toArray();
+			const col = await db.listCollections({ name: 'users' }).toArray();
 			if (col.length > 0) {
 				console.log('Collection user already exists in MongoDb. Exited...');
 			} else {
@@ -23,7 +23,7 @@ module.exports = {
 
 	async down(db) {
 		try {
-			await db.dropCollection('user');
+			await db.dropCollection('users');
 		} catch (err) {
 			throw err;
 		}

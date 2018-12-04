@@ -32,8 +32,34 @@ const getByIdUser = function(req, res, next, id) {
 	});
 };
 
+const getOneUser = function(req, res) {
+	res.json(req.user);
+};
+
+const updateUser = function(req, res, next) {
+	User.findOneAndUpdate(req.body._id, req.body, { new: true }, function(err, user) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(user);
+		}
+	});
+};
+
+const deleteUser = function(req, res, next) {
+	req.user.remove(function(err) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(req.user);
+		}
+	});
+};
 module.exports = {
 	getAllUsers,
 	createUser,
-	getByIdUser
+	getByIdUser,
+	getOneUser,
+	updateUser,
+	deleteUser
 };

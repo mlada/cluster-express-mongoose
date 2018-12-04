@@ -36,6 +36,12 @@ router
 	.post(user.createUser)
 	.get(user.getAllUsers);
 
+router
+	.route('/users/:userId')
+	.get(user.getOneUser)
+	.put(user.updateUser)
+	.delete(user.deleteUser);
+
 router.param('userId', user.getByIdUser);
 
 app.use('/api', router);
