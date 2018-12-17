@@ -14,10 +14,8 @@
 
 ## Зависимости проекта
 
-        npm i express apidoc bluebird body-parser busboy connect-mongo cookie-parser express-session image-type mongoose mongoose-unique-validator nodemon passport passport-local request request-promise consolidate dotenv --save
-
-> - Express — Думаю понятно.
-> - apidoc — Удобно для документирование API
+> - Express
+> - swagger-ui-express — Удобно для документирования API
 > - Bluebird — Promise какие они есть. Нам он понадобится т.к. в стандартных Promise-ах на 4.х.х был баг из-за чего возникал memory-leak. Также promise от которого mongoose зависит более не поддерживается. Нам придется заставить mongoose использовать наш Bluebird.
 > - body-parser — Поддержка json.
 > - busboy — Поддержка form-data.
@@ -29,18 +27,31 @@
 > - mongoose-unqiue-validator — Для указания уникальных данных.
 > - nodemon — Во время разработки автоматически перезагружает наш сервер при сохранении файла.
 > - passport passport-local — Модули для авторизации.
-> - request request-promise — Для тестирования нашего кода.
 > - dotenv - Для конфига приложа.
-> - consolidate - Библиотечка которая поддерживает рендер любых темплейтов.
 > - cluster - встроенная библиотека nodejs
 > - PM2 - менеджер процессов для nodejs.
 > - migrate-mongo - библиотека помогающая создать миграции
+> - express-es6-template-engine - библиотека рендера
 
 ## Теория по проекту
 
 ### Подключение и создание БД mongodb
 
 > [Установка на mac](https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
+ > [Сайт mongo](https://www.mongodb.com/)
+ > [Сайт mongoose](https://mongoosejs.com/)
+> Хорошая шпаргалка по (mongo)[https://habr.com/post/259219/]
+
+                Запуск в консоли
+                mongo --port 28015
+                show dbs
+                use <dbname> - work with this db
+                db - display db you are using
+                show collections
+                show users
+                db.collection.find()
+                db.collection.insertOne()
+                db.collection.drop()
 
 ### Кластеры
 
@@ -66,3 +77,8 @@
 
 > Зачем нужна миграция?
 > Миграция — это изменение состояния базы данных. С ее помощью можно менять коллекции, добавлять поля, изменять поля, инициализировать коллекции начальными данными и так далее. Файлы с миграциями обычно кладутся под контроль версий и каждый разработчик может видеть что конкретно делает та или иная миграция.
+
+### Документирование API
+
+> (Swagger)[https://swagger.io/]
+> (Online generator)[https://api-docs.io/](Generator)[https://www.npmjs.com/package/express-swagger-generator]

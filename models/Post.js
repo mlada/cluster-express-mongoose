@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const message = require("./helpers/validation-messages");
-const URLSlugs = require("mongoose-url-slugs");
-let postSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+const message = require('./helpers/validation-messages');
+const URLSlugs = require('mongoose-url-slugs');
+const postSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, message.required],
@@ -15,8 +15,8 @@ let postSchema = new mongoose.Schema({
 });
 
 // Подключим генератор на основе названия
-postSchema.plugin(URLSlugs("title"));
+postSchema.plugin(URLSlugs('title'));
 
 // Компилируем
-const Post = mongoose.model("post", postSchema);
+const Post = mongoose.model('post', postSchema);
 module.exports = Post;

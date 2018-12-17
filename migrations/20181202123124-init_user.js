@@ -1,23 +1,21 @@
 const createCollection = async db => {
-  await db.createCollection("user", {
+  await db.createCollection('users', {
     validator: {
       $and: [
-        { id: { $type: "number" } },
-        { name: { $type: "string" } },
-        { username: { $type: "string" } },
-        { password: { $type: "string" } }
+        { username: { $type: 'string' } },
+        { password: { $type: 'string' } }
       ]
     },
-    validationAction: "error",
-    validationLevel: "strict"
+    validationAction: 'error',
+    validationLevel: 'strict'
   });
 };
 module.exports = {
   async up(db) {
     try {
-      const col = await db.listCollections({ name: "user" }).toArray();
+      const col = await db.listCollections({ name: 'users' }).toArray();
       if (col.length > 0) {
-        console.log("Collection user already exists in MongoDb. Exited...");
+        console.log('Collection user already exists in MongoDb. Exited...');
       } else {
         await createCollection(db);
       }
@@ -28,7 +26,7 @@ module.exports = {
 
   async down(db) {
     try {
-      await db.dropCollection("user");
+      await db.dropCollection('users');
     } catch (err) {
       throw err;
     }

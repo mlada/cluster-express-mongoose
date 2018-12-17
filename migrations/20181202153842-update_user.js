@@ -2,10 +2,10 @@ module.exports = {
   async up(db) {
     try {
       await db
-        .collection("user")
+        .collection('users')
         .find()
         .forEach(document => {
-          db.collection("user").updateOne(
+          db.collection('users').updateOne(
             { _id: document._id },
             {
               $unset: { age: 0 }

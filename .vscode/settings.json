@@ -1,0 +1,25 @@
+{
+	"explorer.confirmDragAndDrop": true,
+	"explorer.confirmDelete": true,
+
+	"editor.formatOnSave": true,
+	"[javascript]": {
+		"editor.formatOnSave": false
+	},
+
+	"window.zoomLevel": 0,
+	"files.autoSave": "off",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+
+	"auto-close-tag.activationOnLanguage": ["xml", "php", "blade", "ejs", "jinja", "plaintext", "markdown", "vue", "liquid", "erb", "lang-cfml", "cfml", "HTML (Eex)"],
+
+	"eslint.alwaysShowStatus": true,
+	"eslint.run": "onSave",
+	"eslint.autoFixOnSave": true,
+
+	"eslint.options": { "configFile": "./.eslintrc" },
+	"eslint.workingDirectories": ["."],
+	"eslint.validate": ["javascript", "javascriptreact", { "language": "html", "autoFix": true }],
+	"prettier.eslintIntegration": true,
+	"prettier.printWidth": 180
+}
